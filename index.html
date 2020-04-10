@@ -31,8 +31,8 @@ function prase(){
 	dp("歌单ID："+sid);
 	if(sid!='')
 	{
-		//var url='https://api.imjad.cn/cloudmusic/?type=playlist&id='+sid;
-		var url='http://musicapi.leanapp.cn/playlist/detail?id='+sid;
+		var url='https://api.imjad.cn/cloudmusic/?type=playlist&id='+sid;
+		//var url='http://musicapi.leanapp.cn/playlist/detail?id='+sid;
 		dp('加载中...');
 		$.get(url,function(data){
 			switch (data["code"])
