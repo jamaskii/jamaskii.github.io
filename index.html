@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>网易云音乐歌单解析</title>
+<script>
+
+function dp(str)
+{
+	document.getElementById("dp").innerHTML=str;
+}
+
+function prase(){
+	document.getElementById("songid").value='3055367540';
+	var sid = document.getElementById("songid").value;
+	if(sid!='')
+	{
+		var url='http://music.163.com/api/playlist/detail?id='+sid;
+		dp('加载中...');
+		//var url='https://www.ximalaya.com/revision/time';
+		var httpRequest = new XMLHttpRequest();
+		httpRequest.open('GET', url, true);
+		httpRequest.send();
+		httpRequest.onreadystatechange = function () {
+			if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+				var content = httpRequest.responseText;
+				if(content.length > 0)
+				{
+					dp('got');
+				}
+			}
+		};
+	}
+	else
+	{
+		dp('ID不能为空');	
+	}
+	
+}
+
+</script>
+</head>
+<body>
+
+<h1>网易云音乐歌单解析</h1>
+<input id="songid" type="text" style="height:20px;width:100px;" />
+<button type="button" onclick="prase()">解析</button>
+<p id="dp"> </p>
+
+</body>
+</html>
