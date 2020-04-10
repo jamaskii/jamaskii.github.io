@@ -1,37 +1,7 @@
 <html>
 <head>
-<script>
-function dp(text)
-{
-	document.getElementById("label").innerHTML=text;
-}
-
-function demo()
-{
-	var url="http://musicapi.leanapp.cn/song/detail?ids=347230";
-	
-	setTimeout(function(){
-		dp("Loading...");
-		$.get(url,function(data){
-		var song = data["songs"][0];
-		var name = song["name"];
-		var ars = "";
-		var i=0;
-		while(i<song["ar"].length)
-		{
-			if(ars!="")
-			{
-				ars+="s";
-			}
-			ars+=song["ar"][i]["name"];
-			i++;
-		}
-		dp(ars+"-"+name);
-	});
-		});
-	
-}
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<script src="main.js"></script>
 <script src="jquery.js"></script>
 </head>
 <body>
