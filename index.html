@@ -10,26 +10,32 @@ function dp(str)
 	document.getElementById("dp").innerHTML=str;
 }
 
+function settext(id,text)
+{
+	document.getElementById(id).innerHTML=text;
+}
+
 function prase(){
-	document.getElementById("songid").value='3055367540';
 	var sid = document.getElementById("songid").value;
 	if(sid!='')
 	{
-		var url='http://music.163.com/api/playlist/detail?id='+sid;
+		var url='https://api.imjad.cn/cloudmusic/?type=playlist&id='+sid;
 		dp('加载中...');
-		//var url='https://www.ximalaya.com/revision/time';
-		var httpRequest = new XMLHttpRequest();
-		httpRequest.open('GET', url, true);
-		httpRequest.send();
-		httpRequest.onreadystatechange = function () {
-			if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-				var content = httpRequest.responseText;
-				if(content.length > 0)
-				{
-					dp('got');
-				}
+		$.get(url,function(data){
+			switch (data["code"])
+			{
+				case 200:
+					dp("匹配到歌单")
+					settext("name","歌单名："+data["playlist"]["name"]);
+					settext("count","\n歌曲数量："+data["playlist"]["tracks"].length);
+					break;
+				case 404:
+					dp("未找到该歌单！");
+					settext("name","歌单名：");
+					settext("count","\n歌曲数量：");
+					break;
 			}
-		};
+		});
 	}
 	else
 	{
@@ -39,13 +45,16 @@ function prase(){
 }
 
 </script>
+<script src="jquery.js" ></script>
 </head>
 <body>
 
 <h1>网易云音乐歌单解析</h1>
-<input id="songid" type="text" style="height:20px;width:100px;" />
+<input id="songid" type="text" value="3067064154" style="height:20px;width:100px;" />
 <button type="button" onclick="prase()">解析</button>
-<p id="dp"> </p>
+<p id="dp">就绪</p>
+<p id="name">歌单名：</p>
+<p id="count">歌曲数：</p>
 
 </body>
 </html>
