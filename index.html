@@ -17,23 +17,65 @@ function settext(id,text)
 }
 
 function prase(){
-	var sid = document.getElementById("songid").value;
+	settext("list","");
+	//var sid=document.getElementById("songid").value;
+	var str = document.getElementById("songid").value;
+	var pattern = new RegExp("playlist\\?id=(\\d+)");
+	var n = pattern.exec(str);
+	if(n.length==0)
+	{
+		dp("链接格式错误");
+		
+	}
+	var sid=n[1];
+	dp("歌单ID："+sid);
 	if(sid!='')
 	{
-		var url='https://api.imjad.cn/cloudmusic/?type=playlist&id='+sid;
+		//var url='https://api.imjad.cn/cloudmusic/?type=playlist&id='+sid;
+		var url='http://musicapi.leanapp.cn/playlist/detail?id='+sid;
 		dp('加载中...');
 		$.get(url,function(data){
 			switch (data["code"])
 			{
 				case 200:
-					dp("匹配到歌单")
+					dp("匹配到歌单&nbsp&nbspID:"+sid)
+					var songs=data["playlist"]["tracks"];
 					settext("name","歌单名："+data["playlist"]["name"]);
-					settext("count","\n歌曲数量："+data["playlist"]["tracks"].length);
+					settext("count","\n歌曲数量："+songs.length);
+					var i=0;
+					while(i<songs.length)
+					{
+						var name=songs[i]["name"];
+						var arts="";
+						var id=songs[i]["id"];
+						var ars=songs[i]["ar"];
+						var j=0;
+						while(j<ars.length)
+						{
+							if(arts!="")
+							{
+								arts+=",";
+							}
+							arts+=ars[j]["name"];
+							j++;
+						}
+						var list = document.getElementById("list");
+						var item = document.createElement("a");
+						var br = document.createElement("br");
+						item.setAttribute("href","http://music.163.com/song/media/outer/url?id="+id);
+						item.innerHTML=arts+"-"+name;
+						if(i!=0)
+						{
+							list.appendChild(br);
+						}
+						list.appendChild(item);
+						i++;
+					}
 					break;
 				case 404:
 					dp("未找到该歌单！");
 					settext("name","歌单名：");
-					settext("count","\n歌曲数量：");
+					settext("count","歌曲数量：");
 					break;
 			}
 		});
@@ -46,16 +88,33 @@ function prase(){
 }
 
 </script>
-<script src="jquery.js" ></script>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body>
 
 <h1>网易云音乐歌单解析</h1>
-<input id="songid" type="text" value="3067064154" style="height:20px;width:100px;" />
+
+</br>
+<font size="2">歌单链接:</font>
+<input id="songid" type="text" value="http://music.163.com/playlist?id=648611928&userid=449213010" style="height:20px;width:200px;" />
 <button type="button" onclick="prase()">解析</button>
-<p id="dp">就绪</p>
-<p id="name">歌单名：</p>
-<p id="count">歌曲数：</p>
+</br>
+</br>
+<font size="2">想要批量下载或体验更多高级功能？</font>
+</br>
+<font size="2">请</font>
+</><font size="2"><a href="app.zip">下载</a></font>
+<font size="2">"快搬"(64bit,&nbspWin7+)</font>
+</br>
+</br>
+<font size="3" id="dp">就绪</font>
+</br>
+</br>
+<font size="2" id="name">歌单名：</font>
+</br>
+<font size="2" id="count">歌曲数：</font>
+
+<p id="list"></p>
 
 </body>
 </html>
