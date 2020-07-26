@@ -1,0 +1,14 @@
+.container{
+    text-align: center;
+}
+.textbox{
+    width: 90%;
+    height: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.btn{
+    width: 100px;
+    height: 32px;
+    font-size: 18px;
+}
