@@ -58,13 +58,27 @@ function stringToBytes(str) {
 function en(){
     var text_raw = document.getElementById("text_raw");
     var text_encrypted = document.getElementById("text_encrypted");
-    text_encrypted.value = encrypt(text_raw.value);
+    var str="";
+    try{
+        str=encrypt(text_raw.value);
+    }catch(err)
+    {
+        str="出错："+err;
+    }
+    
+    text_encrypted.value = str;
 }
 
 function de(){
     var text_raw = document.getElementById("text_raw");
     var text_encrypted = document.getElementById("text_encrypted");
-    text_raw.value=decrypt(text_encrypted.value);
+    var str="";
+    try{
+        str=decrypt(text_encrypted.value);
+    }catch(err){
+        str="出错："+err;
+    }
+    text_raw.value=str;
 }
 
 function indexOf(word){
@@ -223,5 +237,14 @@ function decrypt(text){
             i++;
         }
         return byteToString(nums);
+    }
+}
+
+function clearContent(obj){
+    if(obj.value=='这里输入要加密的内容' && obj.id=='text_raw'){
+        obj.value='';
+    }
+    if(obj.value=='这里输入要解密的内容' && obj.id=='text_encrypted'){
+        obj.value='';
     }
 }
