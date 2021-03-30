@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>电量剩余</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+        <style>
+            .title{
+                text-align: center;
+                background-color: #619ac3;
+            }
+
+            .sub-title{
+                text-align: center;
+            }
+
+            .item{
+                margin-top: 3;
+                text-align: center;
+                background-color: #8fb2c9;
+                padding: 2;
+                width: auto;
+            }
+
+            .item-title{
+                margin-bottom: 2;
+                margin-top: 2;
+            }
+
+            .table{
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .submit{
+                padding: 2;
+                background-color: #619ac3;
+                margin-top: 5;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        </style>
+
+        <!--禁止ios10以上设备缩放页面-->
+        <script>
+            window.onload = function()
+            {
+                // 阻止双击放大
+                var lastTouchEnd = 0;
+                document.addEventListener('touchstart', function(event) {
+                    if (event.touches.length > 1) {
+                        event.preventDefault();
+                    }
+                });
+                document.addEventListener('touchend', function(event) {
+                    var now = (new Date()).getTime();
+                    if (now - lastTouchEnd <= 300) {
+                        event.preventDefault();
+                    }
+                    lastTouchEnd = now;
+                }, false);
+
+                // 阻止双指放大
+                document.addEventListener('gesturestart', function(event) {
+                    event.preventDefault();
+                });
+            }
+        </script>
+        <script>
+            function createXml(str)
+            {
+            　　if(document.all){//IE浏览器
+                　　var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                    xmlDoc.async = false;
+                　　xmlDoc.loadXML(str);
+                　　return xmlDoc;
+            　　}
+            　　else{//非IE浏览器
+            　　        return new DOMParser().parseFromString(str, "text/xml");
+                }
+            }
+
+            var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
+            httpRequest.open('GET', 'http://xfewm.gxmu.edu.cn/ICBS_WeiXinPay/PurchaseWebService.asmx/getReserveHKAM?AmMeter_ID=3002.004290.1', true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+            httpRequest.send();
+            httpRequest.onreadystatechange = function () {
+                if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                    obj=createXml(httpRequest.responseText);
+                    var rp=obj.getElementsByTagName("remainPower")[0].firstChild.nodeValue;
+                    var rt=obj.getElementsByTagName("readTime")[0].firstChild.nodeValue;
+                    document.getElementById("remain").innerHTML="剩余电量："+rp+"度";
+                    document.getElementById("readtime").innerHTML="读表时间："+rt;
+                }
+            };
+        </script>
+
+    </head>
+    <body>
+        <h1 background-color="#619ac3" class="title">电量剩余</h1>
+        <p class="sub-title">宿舍：西3-625</p>
+        <p id="remain" class="sub-title">电费剩余：加载中...</p>
+        <p id="readtime" class="sub-title">读表时间：加载中...</p>
+        
+    </body>
+</html>

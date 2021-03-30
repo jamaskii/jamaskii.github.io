@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>静态API</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <script>
+            window.onload = function()
+            {
+                var lastTouchEnd = 0;
+                document.addEventListener('touchstart', function(event) {
+                    if (event.touches.length > 1) {
+                        event.preventDefault();
+                    }
+                });
+                document.addEventListener('touchend', function(event) {
+                    var now = (new Date()).getTime();
+                    if (now - lastTouchEnd <= 300) {
+                        event.preventDefault();
+                    }
+                    lastTouchEnd = now;
+                }, false);
+                document.addEventListener('gesturestart', function(event) {
+                    event.preventDefault();
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <a href="fdyy.html">飞登云印</a>
+    </br>
+        <a href="power.html">电费余额</a>
+    </body>
+</html>
