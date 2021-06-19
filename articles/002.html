@@ -1,0 +1,36 @@
+<html lang="cn">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="../css/base.css">
+        <link rel="stylesheet" type="text/css" href="../css/article.css">
+        <title>广西医科大学学工系统漏洞将导致部分学生个人信息泄露</title>
+    </head>
+    <body>
+        <div class="head">
+            <div class="title" id="title">广西医科大学学工系统漏洞将导致部分学生个人信息泄露</div>
+        </div>
+        <div class="container" id="container">
+            <div class="indicator">当前位置：<a href="/">首页</a> > 文章 > 广西医科大学学工系统漏洞将导致部分学生个人信息泄露</div>
+            <div class="content">
+                一次写页面时想起学工系统的展示风格十分不错，便登录学工系统打开开发者工具查看。偶然间发现学工系统页面获取个人信息的请求中存在学生的学号。
+                <img src="../imgs/a002i1.jpg" height="188" width="309" onclick="window.location.href=this.src;">
+                若是学工系统后台对访问者cookie有严格限制的话，传递学号就显得十分多余。
+                </br></br>
+                带着疑问我试着重新构建请求，修改传递的学号，结果惊人地发现可以获取到别人的个人信息！
+                <img src="../imgs/a002i2.jpg" width="330" height="190" onclick="window.location.href=this.src;">
+                泄露的个人信息包括基本的个人信息，如身份证号，学号，姓名，住址，照片等；家庭成员信息，如职业、性别、手机号、身份证号；银行卡号及受教育经历。
+                几乎所有能在学工系统上显示的个人信息都能被其他人获取到。
+                </br></br>
+                这些信息都是自己填写的，如果没有在学工系统上对自己的个人信息进行完善，那第三者获取到的将是空白。
+                但是学工系统对于学生十分重要，许多操作需要在上面完成，个人信息的完善更新是必须的，所以该漏洞的危害十分严重。
+                </br></br>
+                不过提交请求时的student_uuid并不完全由学号组成，还有一段不明意义的8位数字，这段数字将个人信息的泄露限制在一定的范围之内。
+                <img src="../imgs/a002i3.jpg" height="188" width="309" onclick="window.location.href=this.src;">
+                但不论如何，个人信息安全问题不容忽视，许多网络电信诈骗的起源便是个人敏感信息的泄露。我已将该漏洞相关情况上报至学校有关部门，相信不久便可得到修复。
+            </div>
+            <div class="copyright">Power by GitHub,Inc | Copyright 2020-2021 Jamaskii</div>
+        </div>
+        
+    </body>
+</html>
