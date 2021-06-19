@@ -1,0 +1,11 @@
+.welcome{
+    margin: 0px 15px 30px 15px;
+    font-size:15px;
+    color: #ccc;
+}
+
+.logo{
+    height: 46;
+    width: 200;
+    margin-bottom: 5px;
+}

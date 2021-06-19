@@ -1,0 +1,13 @@
+.content{
+    margin: 10 auto;
+    max-width: 400px;
+    left: calc(50% - 200px);
+    text-align: left;
+    padding: 10px 15px 0px 15px;
+}
+
+img{
+    margin: 20px auto;
+    display: table-cell; /*主要是这个属性*/
+    vertical-align: middle;
+}
