@@ -1,0 +1,111 @@
+<html lang="cn">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="../css/base.css">
+        <title>飞登云印文档免费下载</title>
+        <style>
+            input{
+                margin: 10px auto;
+                outline-style: none ;
+                border: 1px solid #ccc; 
+                border-radius: 3px;
+                padding: 8px 8px;
+                width: 80%;
+                max-width: 400px;
+                font-size: 14px;
+                font-weight: 700;
+                font-family: "Microsoft soft";
+            }
+            button{
+                width: 120px;/*设置按钮宽度*/
+                height: 35px;/*设置按钮高度*/
+                color:white;/*字体颜色*/
+                background-color:cornflowerblue;/*按钮背景颜色*/
+                border-radius: 3px;/*让按钮变得圆滑一点*/
+                border-width: 0;/*消去按钮丑的边框*/
+                margin: 0;/*margin0*/
+                outline: none;/*取消轮廓*/
+                font-size: 15px;/*设置字体大小*/
+                font-weight: lighter;/*设置字体粗细*/
+                text-align: center;/*字体居中*/
+                cursor: pointer;/*设置鼠标箭头手势*/
+            }
+            button:hover{
+                transition: .8s linear;/*过渡动画*/
+                background-color:#4B71E0;
+            }
+        </style>
+
+        <script>
+            function getStr(str, start, end)
+            {
+                let res = str.match(new RegExp(`${start}(.*?)${end}`))
+                return res ? res[1] : null
+            }
+            function confirm(){
+                var label=document.getElementById('label');
+                var link=document.getElementById("link").value;
+                if(link==""){
+                    label.innerHTML="请输入分享链接";
+                    return null;
+                }
+
+                var id=getStr(link,"FileShareId={{","}}")
+                if(id==null){
+                    label.innerHTML='链接格式不符，请检查';
+                    return null;
+                }
+                try{
+                    label.innerHTML='解析中...';
+                    var httpRequest = new XMLHttpRequest();//第一步：建立所需的对象
+                    httpRequest.open('GET', 'https://sc.fdvipyy.com/fd//index.php?c=dy&a=getFileRead&z=[FileId={{}}][FileShareId={{'+id+'}}]', true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+                    httpRequest.send();
+                    httpRequest.onreadystatechange = function () {
+                        if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                            //alert(httpRequest.responseText);
+                            var jsonObject= JSON.parse(httpRequest.responseText);
+                            label.innerHTML='[点此下载] '+jsonObject['FileShareObj']['FileName'];
+                            label.setAttribute('href',jsonObject['FileShareObj']['PdfPath']);
+                        }
+                    };
+                }catch(err){
+                    alert("解析出错，请重试");
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="head">
+            <div class="title" id="title">飞登云印文档免费下载</div>
+        </div>
+        <div class="container" id="container">
+            <div class="indicator">当前位置：<a href="/">首页</a> > 在线工具 > 飞登云印文档免费下载</div>
+            <div class="content">
+                <table border="0">
+                    <tr>
+                        <td><a id="label">就绪</a></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="link" placeholder="请输入飞登云印共享链接"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onclick="confirm()">确定</button>
+                        </td>
+                    </tr>
+                </table> 
+                <h3>使用帮助</h3>
+                <img src="../imgs/u001i1.jpg" width="300" height="641" onclick="window.location.href=this.src;">
+            </br>
+                <img src="../imgs/u001i2.jpg" width="300" height="640" onclick="window.location.href=this.src;">
+            </br>
+                <img src="../imgs/u001i3.jpg" width="300" height="641" onclick="window.location.href=this.src;">
+            </div>
+            <div class="copyright">Power by GitHub,Inc | Copyright 2020-2021 Jamaskii</div>
+        </div>
+        
+    </body>
+</html>
