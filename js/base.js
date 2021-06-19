@@ -1,3 +1,4 @@
+/*
 window.onload=function(){
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', 'http://api.v6x.wht.dgwht.top/text/f731c2fb2ad44cd1/c4a940e36ba0bd10', true);
@@ -24,3 +25,4 @@ function updateViews(obj){
     httpRequest.open('POST', 'http://api.v6x.wht.dgwht.top/text/update');
     httpRequest.send(formData);
 }
+*/
