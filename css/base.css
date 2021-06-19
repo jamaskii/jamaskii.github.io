@@ -83,10 +83,17 @@ li:active{
     z-index: 1;
 }
 
+.views{
+    color: #bbb;
+    font-size: 12px;
+    text-align: center;
+    margin: 20px auto 0px auto;
+}
+
 .copyright{
     color: #bbb;
     font-size: 12px;
-    margin: 20px;
+    margin: 2px auto 20px auto;
     text-align: center;
 }
 
