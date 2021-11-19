@@ -1,0 +1,6 @@
+{
+    "open":true,
+    "method":"post",
+    "url":"http://api.v6x.wht.dgwht.top/qidong/add",
+    "data":"appid=f731c2fb2ad44cd1"
+}

@@ -1,0 +1,9 @@
+{
+    "latest":{
+        "versionCode":6,
+        "versionName":"2.0.2"
+    },
+    "news":"修复上一版本登录后不显示学期的bug。该bug非常影响使用体验，故本次更新为强制更新。",
+    "url":"https://jamaskii.lanzoui.com/i7GRqtgok1a",
+    "force":true
+}
