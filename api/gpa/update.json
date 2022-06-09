@@ -1,6 +1,6 @@
 {
     "latest":{
-        "versionCode":3,
+        "versionCode":7,
         "versionName":"2.0.3"
     },
     "news":"优化了启动及部分页面的加载速度，非强制更新。",
